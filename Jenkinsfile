@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = "tarangparikh/calculator"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
     agent {
         docker {
             image 'maven:3-alpine'
@@ -21,7 +26,9 @@ pipeline {
         }
         stage('Build Docker Image'){
             steps{
-                docker.build("tarangparikh/calculator")
+               script{
+                   dockerImage = docker.build(registry)
+               }
             }
         }
     }
