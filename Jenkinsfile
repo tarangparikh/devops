@@ -20,7 +20,9 @@ pipeline {
             }
         }
         stage('Build Docker Image'){
-            def image = docker.build("tarangparikh/calculator")
+            steps{
+                 def image = docker.build("tarangparikh/calculator")
+            }
         }
     }
 }
