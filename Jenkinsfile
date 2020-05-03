@@ -1,4 +1,4 @@
-node {
+pipeline {
     agent {
         docker {
             image 'maven:3-alpine'
@@ -20,8 +20,9 @@ node {
             }
         }
         stage('Build Docker Image'){
-
-            docker.build("tarangparikh/calculator")
+            steps{
+                docker.build("tarangparikh/calculator")
+            }
         }
     }
 }
