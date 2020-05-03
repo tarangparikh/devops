@@ -14,7 +14,7 @@ pipeline {
                     docker {
                         image 'maven:3-alpine'
                         args '-v /root/.m2:/root/.m2'
-                       
+
                     }
             }
             steps {
@@ -37,6 +37,7 @@ pipeline {
             steps{
                script{
                    dockerImage = docker.build(registry)
+                   dockerImage.push()
                }
             }
         }
