@@ -8,7 +8,6 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
-    def image
     stages {
         stage('Build') {
             steps {
@@ -21,7 +20,7 @@ pipeline {
             }
         }
         stage('Build Docker Image'){
-            image = docker.build("tarangparikh/calculator")
+            docker.build("tarangparikh/calculator")
         }
     }
 }
