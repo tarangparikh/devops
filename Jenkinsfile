@@ -14,7 +14,7 @@ pipeline {
                     docker {
                         image 'maven:3-alpine'
                         args '-v /root/.m2:/root/.m2'
-                        label 'maven'
+                       
                     }
             }
             steps {
@@ -26,7 +26,6 @@ pipeline {
                     docker {
                         image 'maven:3-alpine'
                         args '-v /root/.m2:/root/.m2'
-                        label 'maven'
                     }
             }
             steps {
@@ -34,12 +33,7 @@ pipeline {
             }
         }
         stage('Build Docker Image'){
-            agent {
-                    docker {
-                        image 'docker:latest'
-                        label 'docker'
-                    }
-            }
+            agent none
             steps{
                script{
                    dockerImage = docker.build(registry)
