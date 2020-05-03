@@ -1,5 +1,4 @@
 pipeline {
-    def image
     agent {
         docker {
             image 'maven:3-alpine'
@@ -21,7 +20,7 @@ pipeline {
             }
         }
         stage('Build Docker Image'){
-            image = docker.build("tarangparikh/calculator")
+            def image = docker.build("tarangparikh/calculator")
         }
     }
 }
