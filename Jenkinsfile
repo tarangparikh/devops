@@ -44,8 +44,8 @@ pipeline {
             agent none
             steps{
                  script{
-                   withCredentials([usernamePassword(credentialsId: registryCredential, passwordVariable: 'pass', usernameVariable: 'user')]) {
-                      echo user
+                        docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
                    }
                  }
             }
