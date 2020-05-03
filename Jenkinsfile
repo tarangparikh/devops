@@ -36,7 +36,6 @@ pipeline {
             agent none
             steps{
                script{
-                   docker.withRegistry('', registryCredential)
                    dockerImage = docker.build(registry)
                    dockerImage.push()
                }
