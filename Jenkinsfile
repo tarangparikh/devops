@@ -19,5 +19,9 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        def image
+        stage('Build Docker Image'){
+            image = docker.build("tarangparikh/calculator")
+        }
     }
 }
