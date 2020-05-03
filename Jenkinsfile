@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "tarangparikh/calculator"
-        registryCredential = 'docker-hub'
+        registryCredential = 'dockerhub'
         dockerImage = ''
     }
     agent none
@@ -44,10 +44,10 @@ pipeline {
         stage('Deploy Docker Image'){
             agent none
             steps{
-                    script{
-                               docker.withRegistry('', registryCredential)
-                               dockerImage.push()
-                           }
+                 script{
+                   docker.withRegistry('', registryCredential)
+                   dockerImage.push()
+                 }
             }
         }
     }
