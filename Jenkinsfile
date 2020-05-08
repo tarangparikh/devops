@@ -57,7 +57,7 @@ pipeline {
             }
         }
         stage('Remove Unused docker image') {
-          agent none  
+          agent any  
           steps{
             sh "docker rmi $registry:$BUILD_NUMBER"
           }
