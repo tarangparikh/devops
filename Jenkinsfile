@@ -42,7 +42,7 @@ pipeline {
             agent none
             steps{
                script{
-                   dockerImage = docker.build(registry)
+                   dockerImage = docker.build registry + ":$BUILD_NUMBER"
                }
             }
         }
@@ -55,6 +55,12 @@ pipeline {
                    }
                  }
             }
+        }
+        stage('Remove Unused docker image') {
+          agent none  
+          steps{
+            sh "docker rmi $registry:$BUILD_NUMBER"
+          }
         }
         stage('Deploy Docker Image to Node 1 via Rundeck'){
             agent any
