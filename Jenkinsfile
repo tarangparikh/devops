@@ -9,6 +9,12 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
+        stage('clone'){
+            agent any
+            steps{
+                git 'https://github.com/tarangparikh/devops'
+            }
+        }
         stage('Build') {
             agent {
                     docker {
@@ -40,7 +46,7 @@ pipeline {
                }
             }
         }
-        stage('Deploy Docker Image'){
+        stage('Deploy Docker Image to Docker Hub'){
             agent none
             steps{
                  script{
@@ -49,6 +55,21 @@ pipeline {
                    }
                  }
             }
+        }
+        stage('Deploy Docker Image to Node 1 via Rundeck'){
+            agent any
+                steps{
+                    script{
+                        step([$class: "RundeckNotifier",
+                        includeRundeckLogs: true,
+                        jobId: "149af780-50c1-4c87-be0f-282a285acc36",
+                        rundeckInstance: "Rundeck",
+                        shouldFailTheBuild: true,
+                        shouldWaitForRunDeckJob: true,
+                        tailLog:true])
+                    }
+                }
+            
         }
     }
 }
